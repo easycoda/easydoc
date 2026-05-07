@@ -1,0 +1,6 @@
+# Overview
+
+EasyDoc is a document-management system that compiles Markdown files into a multilingual static documentation site, similar to VitePress/Docusaurus. It uses a **Static Site Generation (SSG) + SPA Hydration** architecture: a Vite plugin transforms `.md` files under `docs/` into pre-rendered HTML content that is injected into the static `<div id="root">` at build time, so every generated HTML page contains fully rendered document content visible to search engine crawlers. On first load, React's `hydrateRoot` takes over the existing DOM without re-rendering, then subsequent navigation switches to Client-Side Rendering (CSR). The system supports multiple languages (e.g. `zh`, `en`) via route-prefix-separated directories, client-side navigation without full-page reloads, global full-text search via fuse.js, KaTeX math rendering, Mermaid diagrams, Shiki/Prism syntax highlighting, dark/light theme switching, and responsive mobile layouts.
+
+## Primary User Value
+Technical writers and developers can author documentation in pure Markdown organized by language and section, produce SEO-friendly static HTML with pre-rendered content that search engines can fully crawl, and deliver a fast, app-like reading experience with instant client-side navigation, search, and theme support.
