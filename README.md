@@ -12,7 +12,7 @@ At its core, EasyDoc compiles Markdown files into a multilingual, SEO-friendly s
 
 | Light | Dark | 
 |--------|----------|
-| ![Default Light Home](/public/default-light.jpg) ![Default Light Doc](/public/default-light-doc.jpg) | ![Default Dark Home](/public/default-dark.jpg) ![Default Dark Doc](/public/default-dark-doc.jpg) |
+| ![Default Light Home](/default-light.jpg) ![Default Light Doc](/default-light-doc.jpg) | ![Default Dark Home](/default-dark.jpg) ![Default Dark Doc](/default-dark-doc.jpg) |
 
 ---
 

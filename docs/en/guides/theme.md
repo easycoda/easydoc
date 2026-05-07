@@ -16,7 +16,7 @@ In `index.css` file, replace `:root` , `.dark` and `@theme inline` section to yo
 
 | Light | Dark | 
 |--------|----------|
-| ![Default Light Home](/public/default-light.jpg) ![Default Light Doc](/public/default-light-doc.jpg) | ![Default Dark Home](/public/default-dark.jpg) ![Default Dark Doc](/public/default-dark-doc.jpg) |
+| ![Default Light Home](/default-light.jpg) ![Default Light Doc](/default-light-doc.jpg) | ![Default Dark Home](/default-dark.jpg) ![Default Dark Doc](/default-dark-doc.jpg) |
 
 <details>
 <summary>Click to view theme code</summary>
@@ -190,7 +190,7 @@ In `index.css` file, replace `:root` , `.dark` and `@theme inline` section to yo
 
  | Light | Dark | 
 |--------|----------|
-| ![Vercel Light Home](/public/vercel-light.jpg) ![Vercel Light Doc](/public/vercel-light-doc.jpg) | ![Vercel Dark Home](/public/vercel-dark.jpg) ![Vercel Dark Doc](/public/vercel-dark-doc.jpg) |
+| ![Vercel Light Home](/vercel-light.jpg) ![Vercel Light Doc](/vercel-light-doc.jpg) | ![Vercel Dark Home](/vercel-dark.jpg) ![Vercel Dark Doc](/vercel-dark-doc.jpg) |
 
 <details>
 <summary>Click to view theme code</summary>
@@ -367,7 +367,7 @@ In `index.css` file, replace `:root` , `.dark` and `@theme inline` section to yo
 
  | Light | Dark | 
 |--------|----------|
-| ![Terminal Light Home](/public/terminal-light.jpg) ![Terminal Light Doc](/public/terminal-light-doc.jpg) | ![Terminal Dark Home](/public/terminal-dark.jpg) ![Terminal Dark Doc](/public/terminal-dark-doc.jpg) |
+| ![Terminal Light Home](/terminal-light.jpg) ![Terminal Light Doc](/terminal-light-doc.jpg) | ![Terminal Dark Home](/terminal-dark.jpg) ![Terminal Dark Doc](/terminal-dark-doc.jpg) |
 
 <details>
 <summary>Click to View theme code</summary>
@@ -559,7 +559,7 @@ In `index.css` file, replace `:root` , `.dark` and `@theme inline` section to yo
 
  | Light | Dark | 
 |--------|----------|
-| ![Blue Light Home](/public/blue-light.jpg) ![Blue Light Doc](/public/blue-light-doc.jpg) | ![Blue Dark Home](/public/blue-dark.jpg) ![Blue Dark Doc](/public/blue-dark-doc.jpg) |
+| ![Blue Light Home](/blue-light.jpg) ![Blue Light Doc](/blue-light-doc.jpg) | ![Blue Dark Home](/blue-dark.jpg) ![Blue Dark Doc](/blue-dark-doc.jpg) |
 
 <details>
 <summary>Click to View theme code</summary>

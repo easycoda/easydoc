@@ -3,7 +3,7 @@ import type { SiteConfig } from '../types/config';
 export const siteConfig: SiteConfig = {
   title: 'EasyDoc',
   description: 'EasyDoc - A modern documentation site',
-  baseUrl: 'https://docs.easycoda.com',
+  baseUrl: 'https://easycoda.github.io/easydoc',
   ogImage: '/logo.png',
   locales: ['en', 'zh'],
   defaultLocale: 'en',
