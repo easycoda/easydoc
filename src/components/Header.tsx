@@ -79,7 +79,7 @@ export function Header({
             to="/"
             className="flex items-center gap-2 font-semibold text-lg"
           >
-            <img src="/logo.png" alt="Logo" className="size-6 dark:invert" aria-hidden="true" />
+            <img src="/easydoc/logo.png" alt="Logo" className="size-6 dark:invert" aria-hidden="true" />
             <span className="hidden sm:inline">{siteConfig.title}</span>
           </Link>
         </div>
