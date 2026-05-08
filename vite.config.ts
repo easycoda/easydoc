@@ -17,6 +17,7 @@ const easyDocOptions: EasyDocPluginOptions = {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/easydoc/',
   server: {
     host: "0.0.0.0",
     port: 8080,
