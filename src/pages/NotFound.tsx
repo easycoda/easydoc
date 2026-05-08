@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from '@/i18n/index';
 import { Button } from '@/components/ui/button';
 import { Home } from 'lucide-react';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export function NotFoundPage(): React.ReactElement {
   const t = useTranslation();
-
+  useDocumentTitle(t['notfound.title'] || '404 - Page Not Found');
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
       <div className="flex flex-col items-center text-center">

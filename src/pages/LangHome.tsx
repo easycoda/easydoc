@@ -4,6 +4,8 @@ import { Loader2 } from 'lucide-react';
 import { useAppStore } from '@/store/appStore';
 import { siteConfig } from '@/lib/siteConfig';
 import { HomePage } from '@/pages/Home';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { useTranslation } from '@/i18n/index';
 import type { Locale } from '@/types/i18n';
 
 /**
@@ -18,7 +20,10 @@ import type { Locale } from '@/types/i18n';
 export function LangHomePage(): React.ReactElement {
   const { lang } = useParams<{ lang: string }>();
   const navigate = useNavigate();
+  const t = useTranslation();
 
+  // Set document title (same as HomePage)
+  useDocumentTitle(t['home.title'] || siteConfig.title);
   // Validate the language param
   const isValidLang =
     !!lang && (siteConfig.locales as readonly string[]).includes(lang);
