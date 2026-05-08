@@ -1,6 +1,6 @@
 import type { DocPageData, DocManifest, SearchIndex } from '@/types/doc';
 import type { HydrationData, HomeHydrationData } from '@/types/hydration';
-
+import { siteConfig } from '@/lib/siteConfig';
 // ---------------------------------------------------------------------------
 // TanStack Query key factory
 // ---------------------------------------------------------------------------
@@ -121,8 +121,8 @@ export async function fetchDocPage(
   // Prod: fetch the SSG-generated static HTML and extract hydration data
   const htmlUrl =
     path === 'index'
-      ? `/${lang}/index.html`
-      : `/${lang}/${path}.html`;
+      ? `${siteConfig.baseUrl}/${lang}/index.html`
+      : `${siteConfig.baseUrl}/${lang}/${path}.html`;
 
   const res = await fetch(htmlUrl);
   if (!res.ok) {
@@ -199,7 +199,7 @@ export async function fetchDocPage(
 export async function fetchDocManifest(
   lang: string,
 ): Promise<DocManifest> {
-  const url = `/manifest-${lang}.json`;
+  const url = `${siteConfig.baseUrl}/manifest-${lang}.json`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(
@@ -214,7 +214,7 @@ export async function fetchDocManifest(
  * time (`/search-index.json`).
  */
 export async function fetchSearchIndex(): Promise<SearchIndex> {
-  const res = await fetch('/search-index.json');
+  const res = await fetch(`${siteConfig.baseUrl}/search-index.json`);
   if (!res.ok) {
     throw new Error(
       `Failed to load search index: ${res.status} ${res.statusText}`,
