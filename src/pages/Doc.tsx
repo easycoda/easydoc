@@ -7,7 +7,8 @@ import { useDocData } from '@/hooks/useDocData';
 import { DocContent } from '@/components/DocContent';
 import { DocNav } from '@/components/DocNav';
 import { useDocContext } from '@/components/Layout';
-
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { siteConfig } from '@/lib/siteConfig';
 /**
  * DocPage — the main documentation page component.
  *
@@ -31,6 +32,13 @@ export function DocPage(): React.ReactElement {
   const resolvedLang = lang ?? 'en';
 
   const { data, isLoading, error } = useDocData(resolvedLang, resolvedPath);
+  // ------------------------------------------------------------------
+  // Document title — set browser tab title
+  // Falls back to siteConfig.title when doc data is not yet available
+  // or when frontmatter.title is missing.
+  // ------------------------------------------------------------------
+  const docTitle = data?.frontmatter?.title || siteConfig.title;
+  useDocumentTitle(docTitle);
 
   // ------------------------------------------------------------------
   // Heading / TOC integration via DocContext (set by Layout)
