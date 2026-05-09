@@ -27,7 +27,7 @@ export function useSearch(lang: string,  { enabled = true } = {}): UseSearchResu
     error,
   } = useQuery<SearchIndex>({
     queryKey: docKeys.searchIndex(),
-    queryFn: fetchSearchIndex,
+    queryFn: () => fetchSearchIndex(lang),
     staleTime: Infinity,
     enabled,
   });

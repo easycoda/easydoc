@@ -18,7 +18,6 @@ import {
   SidebarProvider,
   SidebarInset,
 } from '@/components/ui/sidebar';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 import { Header } from '@/components/Header';
 import { DocSidebar } from '@/components/DocSidebar';
