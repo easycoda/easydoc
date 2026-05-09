@@ -65,7 +65,6 @@ export function SearchTrigger({ onOpen }: SearchTriggerProps): React.ReactElemen
       onClick={onOpen}
       className={cn(
         'relative h-9 md:w-full justify-start gap-2 px-2 text-sm font-normal text-muted-foreground',
-        'md:pr-12',
       )}
     >
       <SearchIcon className="size-4 shrink-0 opacity-50" />
