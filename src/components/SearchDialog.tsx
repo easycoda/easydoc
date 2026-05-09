@@ -1,7 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FileTextIcon } from 'lucide-react';
-
 import {
   CommandDialog,
   CommandInput,
@@ -12,6 +11,7 @@ import {
 } from '@/components/ui/command';
 import { useSearch } from '@/hooks/useSearch';
 import type { SearchIndexEntry } from '@/types/doc';
+import { useAppStore } from '@/store/appStore';
 
 // ---------------------------------------------------------------------------
 // Props
@@ -73,7 +73,10 @@ export function SearchDialog({
   onOpenChange,
 }: SearchDialogProps): React.ReactElement {
   const navigate = useNavigate();
-  const { search, isLoading, error } = useSearch();
+  // const { lang } = useParams<{ lang?: string }>();
+  // const currentLang = lang ?? siteConfig.defaultLocale;
+  const locale = useAppStore((s) => s.locale);
+  const { search, isLoading, error } = useSearch(locale, { enabled: open });
 
   const [query, setQuery] = useState('');
 
