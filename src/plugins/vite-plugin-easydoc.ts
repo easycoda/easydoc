@@ -1,7 +1,7 @@
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite';
 import type { DocFrontmatter, TocHeading, DocNavItem, DocManifest, SearchIndexEntry, SearchIndex, DocPageData, DocNavRef } from '../types/doc';
 import type { EasyDocPluginOptions } from '../types/vite-plugin';
-import { VIRTUAL_DOC_PREFIX, VIRTUAL_MANIFEST_PREFIX, VIRTUAL_SEARCH_INDEX } from '../types/vite-plugin';
+// import { VIRTUAL_DOC_PREFIX, VIRTUAL_MANIFEST_PREFIX, VIRTUAL_SEARCH_INDEX } from '../types/vite-plugin';
 import type { HydrationData, HomeHydrationData } from '../types/hydration';
 import type { SeoMeta } from '../types/seo';
 import { buildSeoMetaString, buildHomeSeoMeta } from './ssg-home';
@@ -288,19 +288,19 @@ export function vitePluginEasyDoc(options: EasyDocPluginOptions): Plugin {
   // Virtual Module IDs
   // -----------------------------------------------------------------------
 
-  const DOC_PREFIX = VIRTUAL_DOC_PREFIX;
-  const MANIFEST_PREFIX = VIRTUAL_MANIFEST_PREFIX;
-  const SEARCH_INDEX_ID = VIRTUAL_SEARCH_INDEX;
+  // const DOC_PREFIX = VIRTUAL_DOC_PREFIX;
+  // const MANIFEST_PREFIX = VIRTUAL_MANIFEST_PREFIX;
+  // const SEARCH_INDEX_ID = VIRTUAL_SEARCH_INDEX;
 
-  function docIdToModulePath(id: string): string | null {
-    if (id.startsWith(DOC_PREFIX)) return id.slice(DOC_PREFIX.length);
-    return null;
-  }
+  // function docIdToModulePath(id: string): string | null {
+  //   if (id.startsWith(DOC_PREFIX)) return id.slice(DOC_PREFIX.length);
+  //   return null;
+  // }
 
-  function manifestIdToLang(id: string): string | null {
-    if (id.startsWith(MANIFEST_PREFIX)) return id.slice(MANIFEST_PREFIX.length);
-    return null;
-  }
+  // function manifestIdToLang(id: string): string | null {
+  //   if (id.startsWith(MANIFEST_PREFIX)) return id.slice(MANIFEST_PREFIX.length);
+  //   return null;
+  // }
 
   // Resolve virtual "path" => absolute .md file path
   function resolveMdFile(modulePath: string): string {
@@ -646,10 +646,10 @@ export function vitePluginEasyDoc(options: EasyDocPluginOptions): Plugin {
 
     resolveId(source: string) {
       // Intercept virtual doc imports
-      if (source.startsWith(DOC_PREFIX)) return '\0' + source;
-      if (source.startsWith(MANIFEST_PREFIX)) return '\0' + source;
-      if (source === SEARCH_INDEX_ID) return '\0' + SEARCH_INDEX_ID;
-      return null;
+      // if (source.startsWith(DOC_PREFIX)) return '\0' + source;
+      // if (source.startsWith(MANIFEST_PREFIX)) return '\0' + source;
+      // if (source === SEARCH_INDEX_ID) return '\0' + SEARCH_INDEX_ID;
+      // return null;
     },
 
     async load(id: string) {

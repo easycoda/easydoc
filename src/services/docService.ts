@@ -1,3 +1,4 @@
+import { siteConfig } from '@/lib/siteConfig';
 import type { DocPageData, DocManifest, SearchIndex } from '@/types/doc';
 import type { HydrationData, HomeHydrationData } from '@/types/hydration';
 import { siteConfig } from '@/lib/siteConfig';
