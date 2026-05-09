@@ -26,6 +26,21 @@ export default defineConfig({
       overlay: false,
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('react-router')) return 'vendor-router'
+          if (
+            id.includes('react-dom') ||
+            id.includes('react/') ||
+            id.includes('@radix-ui') ||
+            id.includes('@floating-ui')
+          ) return 'vendor-react'
+        }
+      }
+    }
+  }, 
   plugins: [
     vitePluginEasyDoc(easyDocOptions),
     react(),
