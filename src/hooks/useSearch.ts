@@ -20,7 +20,7 @@ export interface UseSearchResult {
  * The search index is fetched once (`staleTime: Infinity`) and reused across
  * the entire application session.
  */
-export function useSearch(): UseSearchResult {
+export function useSearch(lang: string,  { enabled = true } = {}): UseSearchResult {
   const {
     data: searchIndex,
     isLoading,
@@ -29,6 +29,7 @@ export function useSearch(): UseSearchResult {
     queryKey: docKeys.searchIndex(),
     queryFn: fetchSearchIndex,
     staleTime: Infinity,
+    enabled,
   });
 
   const fuse = useMemo(() => {
