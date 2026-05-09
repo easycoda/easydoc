@@ -15,7 +15,6 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { SearchTrigger } from '@/components/SearchTrigger';
 import { SearchDialog } from '@/components/SearchDialog';
 import { DesktopNavItem } from '@/components/DesktopNavItem';
-import { MobileNavList } from '@/components/MobileNavList';
 
 // ---------------------------------------------------------------------------
 // Props

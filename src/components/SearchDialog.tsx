@@ -75,7 +75,7 @@ export function SearchDialog({
   const navigate = useNavigate();
   const { lang } = useParams<{ lang?: string }>();
   const currentLang = lang ?? siteConfig.defaultLocale;
-  const { search, isLoading, error } = useSearch(currentLang);
+  const { search, isLoading, error } = useSearch(currentLang, { enabled: open });
 
   const [query, setQuery] = useState('');
 
