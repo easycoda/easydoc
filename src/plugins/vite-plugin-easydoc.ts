@@ -487,34 +487,32 @@ export function vitePluginEasyDoc(options: EasyDocPluginOptions): Plugin {
   // Search index builder
   // -----------------------------------------------------------------------
 
-  function buildSearchIndex(): SearchIndex {
+  function buildSearchIndex(lang: string): SearchIndex {
     const entries: SearchIndexEntry[] = [];
 
-    for (const lang of locales) {
-      const langDir = path.join(resolvedDocsRoot, lang);
-      if (!fs.existsSync(langDir)) continue;
-      const files = collectDocFiles(langDir, lang, langDir);
+    const langDir = path.join(resolvedDocsRoot, lang);
+    const files = collectDocFiles(langDir, lang, langDir);
 
-      for (const file of files) {
-        try {
-          const raw = fs.readFileSync(file.fullPath, 'utf-8');
-          const parsed = matter(raw);
-          const plainText = stripMarkdown(parsed.content);
-          const section = file.relativePath.split('/')[0] || undefined;
-          const sectionTitle = section ? filenameToTitle(section) : undefined;
+    for (const file of files) {
+      try {
+        const raw = fs.readFileSync(file.fullPath, 'utf-8');
+        const parsed = matter(raw);
+        const plainText = stripMarkdown(parsed.content);
+        const section = file.relativePath.split('/')[0] || undefined;
+        const sectionTitle = section ? filenameToTitle(section) : undefined;
 
-          entries.push({
-            title: (parsed.data.title as string) || filenameToTitle(path.basename(file.relativePath)),
-            text: plainText,
-            path: toDocPath(lang, file.relativePath),
-            lang,
-            section: sectionTitle,
-          });
-        } catch {
-          // skip files that can't be read
-        }
+        entries.push({
+          title: (parsed.data.title as string) || filenameToTitle(path.basename(file.relativePath)),
+          text: plainText,
+          path: toDocPath(lang, file.relativePath),
+          lang,
+          section: sectionTitle,
+        });
+      } catch {
+        // skip files that can't be read
       }
     }
+    
 
     return entries;
   }
@@ -658,56 +656,56 @@ export function vitePluginEasyDoc(options: EasyDocPluginOptions): Plugin {
       const rawId = id.startsWith('\0') ? id.slice(1) : id;
 
       // --- Doc module ---
-      if (rawId.startsWith(DOC_PREFIX)) {
-        const modulePath = docIdToModulePath(rawId);
-        if (!modulePath) return null;
+      // if (rawId.startsWith(DOC_PREFIX)) {
+      //   const modulePath = docIdToModulePath(rawId);
+      //   if (!modulePath) return null;
 
-        const mdPath = resolveMdFile(modulePath);
-        if (!fs.existsSync(mdPath)) {
-          return `export default { html: '', frontmatter: { title: '' }, headings: [], lang: '', path: '' };`;
-        }
+      //   const mdPath = resolveMdFile(modulePath);
+      //   if (!fs.existsSync(mdPath)) {
+      //     return `export default { html: '', frontmatter: { title: '' }, headings: [], lang: '', path: '' };`;
+      //   }
 
-        const raw = fs.readFileSync(mdPath, 'utf-8');
+      //   const raw = fs.readFileSync(mdPath, 'utf-8');
 
-        // Ensure compiler is initialized
-        await compiler.initialize();
+      //   // Ensure compiler is initialized
+      //   await compiler.initialize();
 
-        const lang = docPathToLang(modulePath);
-        const residual = docPathToResidual(modulePath);
-        const compiled = compiler.compile(raw);
+      //   const lang = docPathToLang(modulePath);
+      //   const residual = docPathToResidual(modulePath);
+      //   const compiled = compiler.compile(raw);
 
-        // Compute prev/next navigation
-        const manifest = buildManifest(lang);
-        const flatNav = flattenNav(manifest.nav);
-        const { prev, next } = computePrevNext(flatNav, modulePath);
+      //   // Compute prev/next navigation
+      //   const manifest = buildManifest(lang);
+      //   const flatNav = flattenNav(manifest.nav);
+      //   const { prev, next } = computePrevNext(flatNav, modulePath);
 
-        const data: DocPageData = {
-          html: compiled.html,
-          frontmatter: compiled.frontmatter,
-          headings: compiled.headings,
-          lang,
-          path: residual,
-          ...(prev ? { prev } : {}),
-          ...(next ? { next } : {}),
-        };
+      //   const data: DocPageData = {
+      //     html: compiled.html,
+      //     frontmatter: compiled.frontmatter,
+      //     headings: compiled.headings,
+      //     lang,
+      //     path: residual,
+      //     ...(prev ? { prev } : {}),
+      //     ...(next ? { next } : {}),
+      //   };
 
-        return `export default ${JSON.stringify(data)};`;
-      }
+      //   return `export default ${JSON.stringify(data)};`;
+      // }
 
       // --- Manifest module ---
-      if (rawId.startsWith(MANIFEST_PREFIX)) {
-        const lang = manifestIdToLang(rawId);
-        if (!lang) return null;
+      // if (rawId.startsWith(MANIFEST_PREFIX)) {
+      //   const lang = manifestIdToLang(rawId);
+      //   if (!lang) return null;
 
-        const manifest = buildManifest(lang);
-        return `export default ${JSON.stringify(manifest)};`;
-      }
+      //   const manifest = buildManifest(lang);
+      //   return `export default ${JSON.stringify(manifest)};`;
+      // }
 
       // --- Search index ---
-      if (rawId === SEARCH_INDEX_ID) {
-        const index = buildSearchIndex();
-        return `export default ${JSON.stringify(index)};`;
-      }
+      // if (rawId === SEARCH_INDEX_ID) {
+      //   const index = buildSearchIndex();
+      //   return `export default ${JSON.stringify(index)};`;
+      // }
 
       return null;
     },
@@ -722,14 +720,20 @@ export function vitePluginEasyDoc(options: EasyDocPluginOptions): Plugin {
 
     configureServer(server: ViteDevServer) {
       // Serve search-index.json
-      server.middlewares.use('/search-index.json', (_req, res) => {
-        const index = buildSearchIndex();
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(index));
-      });
+      // server.middlewares.use('/search-index.json', (_req, res) => {
+      //   const index = buildSearchIndex();
+      //   res.setHeader('Content-Type', 'application/json');
+      //   res.end(JSON.stringify(index));
+      // });
 
       // Serve per-language manifest JSON
       for (const lang of locales) {
+        server.middlewares.use(`/search-index-${lang}.json`, (_req, res) => {
+          const index = buildSearchIndex(lang);
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(index));
+        });
+
         server.middlewares.use(`/manifest-${lang}.json`, (_req, res) => {
           const manifest = buildManifest(lang);
           res.setHeader('Content-Type', 'application/json');
@@ -963,16 +967,16 @@ export function vitePluginEasyDoc(options: EasyDocPluginOptions): Plugin {
     },
 
     buildEnd() {
-      // Emit search-index.json
-      const searchIndex = buildSearchIndex();
-      this.emitFile({
-        type: 'asset',
-        fileName: 'search-index.json',
-        source: JSON.stringify(searchIndex),
-      });
-
       // Emit per-language manifest JSON files
       for (const lang of locales) {
+        // Emit search-index.json
+        const searchIndex = buildSearchIndex(lang);
+        this.emitFile({
+          type: 'asset',
+          fileName: `search-index-${lang}.json`,
+          source: JSON.stringify(searchIndex),
+        });
+
         const manifest = buildManifest(lang);
         this.emitFile({
           type: 'asset',

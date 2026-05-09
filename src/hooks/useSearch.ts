@@ -20,14 +20,14 @@ export interface UseSearchResult {
  * The search index is fetched once (`staleTime: Infinity`) and reused across
  * the entire application session.
  */
-export function useSearch(): UseSearchResult {
+export function useSearch(lang: string): UseSearchResult {
   const {
     data: searchIndex,
     isLoading,
     error,
   } = useQuery<SearchIndex>({
     queryKey: docKeys.searchIndex(),
-    queryFn: fetchSearchIndex,
+    queryFn: () => fetchSearchIndex(lang),
     staleTime: Infinity,
   });
 

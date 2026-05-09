@@ -213,8 +213,8 @@ export async function fetchDocManifest(
  * Fetch the pre-built search index from the static JSON file emitted at build
  * time (`/search-index.json`).
  */
-export async function fetchSearchIndex(): Promise<SearchIndex> {
-  const res = await fetch(`${siteConfig.baseUrl}/search-index.json`);
+export async function fetchSearchIndex(lang: string): Promise<SearchIndex> {
+  const res = await fetch(`${siteConfig.baseUrl}/search-index-${lang}.json`);
   if (!res.ok) {
     throw new Error(
       `Failed to load search index: ${res.status} ${res.statusText}`,

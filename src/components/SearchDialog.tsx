@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FileTextIcon } from 'lucide-react';
-
+import { siteConfig } from '@/lib/siteConfig';
 import {
   CommandDialog,
   CommandInput,
@@ -73,7 +73,9 @@ export function SearchDialog({
   onOpenChange,
 }: SearchDialogProps): React.ReactElement {
   const navigate = useNavigate();
-  const { search, isLoading, error } = useSearch();
+  const { lang } = useParams<{ lang?: string }>();
+  const currentLang = lang ?? siteConfig.defaultLocale;
+  const { search, isLoading, error } = useSearch(currentLang);
 
   const [query, setQuery] = useState('');
 
