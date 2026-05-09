@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "TSX_TSCONFIG_PATH=./tsconfig.tsx.json node --import tsx --import ./src/ssr/css-loader.mjs ./node_modules/vite/bin/vite.js --configLoader native",
-    "build": "tsc -b && TSX_TSCONFIG_PATH=./tsconfig.tsx.json node --import tsx --import ./src/ssr/css-loader.mjs ./node_modules/vite/bin/vite.js build --configLoader native",
+    "build": "tsc -b && NODE_ENV=production TSX_TSCONFIG_PATH=./tsconfig.tsx.json node --import tsx --import ./src/ssr/css-loader.mjs ./node_modules/vite/bin/vite.js build --configLoader native",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
